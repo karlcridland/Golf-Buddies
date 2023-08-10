@@ -21,4 +21,6 @@ class Profile{
         self.friends.append(golfer)
     }
     
+    
+    
 }

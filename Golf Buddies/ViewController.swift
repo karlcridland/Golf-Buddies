@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class ViewController: UIViewController {
     
@@ -32,3 +33,9 @@ class ViewController: UIViewController {
 
 }
 
+func timestamp() -> String {
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "yyyy:MM:dd:HH:mm:ss"
+    let timestamp = dateFormatter.string(from: Date())
+    return timestamp
+}

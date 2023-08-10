@@ -20,7 +20,7 @@ class Match{
         self.golfers = []
         self.courseType = courseType
         self.rounds = []
-        self.id = id ?? ""
+        self.id = id ?? ViewController.profile!.golfer.id+timestamp()
         
         for _ in 0 ..< courseType.rawValue{
             self.rounds.append(Round(nil))
