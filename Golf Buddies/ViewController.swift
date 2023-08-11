@@ -29,9 +29,17 @@ class ViewController: UIViewController {
         }
     }
     
+    // If no log in details are present, a pop up is created to ask for details -- AuthViewController
+    
     func requestAuthentication(){
+        print("Requesting authorisation")
+        if let auth = self.storyboard?.instantiateViewController(withIdentifier: "AuthViewController") as? AuthViewController{
+            self.present(auth, animated: true, completion: {
+                
+            })
+        }
     }
-
+    
 }
 
 func timestamp() -> String {

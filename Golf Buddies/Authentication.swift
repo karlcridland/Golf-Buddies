@@ -28,6 +28,7 @@ class Authentication{
                     print(firstName, lastName)
                 }
             }
+            viewController.getProfile()
         }
     }
     
