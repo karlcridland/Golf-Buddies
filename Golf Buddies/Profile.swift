@@ -12,15 +12,13 @@ class Profile{
     public let golfer: Golfer
     public var friends: [Golfer]
 
-    public init(_ id: String, _ name: String) {
-        self.golfer = Golfer(id, name)
+    public init(_ id: String, _ firstName: String, _ lastName: String) {
+        self.golfer = Golfer(id, firstName, lastName)
         self.friends = []
     }
     
     public func addFriend(_ golfer: Golfer){
         self.friends.append(golfer)
     }
-    
-    
     
 }

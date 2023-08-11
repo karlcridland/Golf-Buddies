@@ -17,4 +17,14 @@ class Firebase{
         self.ref = Database.database().reference()
     }
     
+    public func getName(_ id: String, _ completion: (String, String) -> ()){
+        self.ref.child("user/name/first/\(id)").observeSingleEvent(of: .value) { snap_a in
+            self.ref.child("user/name/last/\(id)").observeSingleEvent(of: .value) { snap_b in
+                if let firstName = snap_a.value as? String, let lastName = snap_b.value as? String{
+                    print(firstName, lastName)
+                }
+            }
+        }
+    }
+    
 }

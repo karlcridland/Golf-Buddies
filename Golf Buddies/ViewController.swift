@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import FirebaseAuth
 
 class ViewController: UIViewController {
     
@@ -14,21 +13,23 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.getProfile()
+        
+        Authentication.shared.checkStatus(self)
     }
     
     func getProfile(){
         let standard = UserDefaults.standard
-        if let id = standard.value(forKey: "id") as? String, let name = standard.value(forKey: "name") as? String{
-            ViewController.profile = Profile(id, name)
+        if let id = standard.value(forKey: "id") as? String,
+            let firstName = standard.value(forKey: "first-name") as? String,
+            let lastName = standard.value(forKey: "last-name") as? String{
+            ViewController.profile = Profile(id, firstName, lastName)
         }
         else{
-            self.requestProfile()
+            self.requestAuthentication()
         }
     }
     
-    func requestProfile(){
-        
+    func requestAuthentication(){
     }
 
 }
