@@ -35,7 +35,7 @@ class ViewController: UIViewController {
         print("Requesting authorisation")
         if let auth = self.storyboard?.instantiateViewController(withIdentifier: "AuthViewController") as? AuthViewController{
             self.present(auth, animated: true, completion: {
-                
+                auth.setViewController(self)
             })
         }
     }

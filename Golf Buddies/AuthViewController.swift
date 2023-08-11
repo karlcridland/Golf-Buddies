@@ -22,8 +22,9 @@ class AuthViewController: UIViewController{
     }
     
     @objc func signInClicked(){
-        if let viewController = self.viewController{
-            
+        if let viewController = self.viewController, let e = email.text, let p = password.text{
+            Authentication.shared.signIn(e, p)
+            self.dismiss(animated: true)
         }
     }
     
