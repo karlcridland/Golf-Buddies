@@ -13,18 +13,32 @@ class AuthViewController: UIViewController{
     @IBOutlet var email: UITextField!
     @IBOutlet var password: UITextField!
     @IBOutlet var signInButton: UIButton!
+    @IBOutlet var forgotPasswordButton: UIButton!
+    @IBOutlet var createAccountButton: UIButton!
     
     private var viewController: ViewController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.signInButton.addTarget(self, action: #selector(self.signInClicked), for: .touchUpInside)
+        self.signInButton.addTarget(self, action: #selector(self.signIn), for: .touchUpInside)
+        self.forgotPasswordButton.addTarget(self, action: #selector(self.signIn), for: .touchUpInside)
+        self.createAccountButton.addTarget(self, action: #selector(self.createAccount), for: .touchUpInside)
     }
     
-    @objc func signInClicked(){
-        if let viewController = self.viewController, let e = email.text, let p = password.text{
+    @objc func signIn(){
+        if let _ = self.viewController, let e = email.text, let p = password.text{
             Authentication.shared.signIn(e, p)
             self.dismiss(animated: true)
+        }
+    }
+    
+    @objc func createAccount(){
+        if let viewController = self.viewController, let createAccountViewController = viewController.createAccountViewController{
+            print("dismissing")
+            self.dismiss(animated: true){
+                print("hello there")
+                viewController.present(createAccountViewController, animated: true)
+            }
         }
     }
     
