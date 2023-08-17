@@ -26,6 +26,8 @@ class ViewController: UIViewController {
             authViewController.setViewController(self)
             createAccountViewController.setViewController(self)
         }
+        
+        let _ = Firebase.shared
     }
     
     func getProfile() -> Bool{

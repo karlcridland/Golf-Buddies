@@ -12,9 +12,12 @@ class Club{
     let id: String
     let title: String
     
+    var courses: [String: Any]
+    
     init(_ id: String, _ title: String){
         self.id = id
         self.title = title
+        self.courses = [:]
         self.getCourses()
     }
     

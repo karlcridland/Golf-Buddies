@@ -27,4 +27,9 @@ class Firebase{
         }
     }
     
+    public func setHole(_ club: String, _ course: Int, _ hole: Int, _ par: Int, _ yards: Int){
+        let layout = self.ref.child("club/\(club)/course/\(course)/layout/").child(String(hole))
+        layout.setValue(["par":par,"yards":yards])
+    }
+    
 }
