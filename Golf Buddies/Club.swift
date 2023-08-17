@@ -12,7 +12,7 @@ class Club{
     let id: String
     let title: String
     
-    var courses: [String: Any]
+    var courses: [String: [Int: Hole]]
     
     init(_ id: String, _ title: String){
         self.id = id
@@ -21,8 +21,23 @@ class Club{
         self.getCourses()
     }
     
+    func getDistance(_ course: String) -> Int{
+        var total = 0
+        if let holes = courses[course]{
+            holes.forEach { (n, hole) in
+                total += hole.yards
+            }
+        }
+        return total
+    }
+    
     private func getCourses(){
         
     }
     
+}
+
+struct Hole{
+    let par: Int
+    let yards: Int
 }
