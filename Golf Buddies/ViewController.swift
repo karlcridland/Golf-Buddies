@@ -27,7 +27,12 @@ class ViewController: UIViewController {
             createAccountViewController.setViewController(self)
         }
         
-        let _ = Firebase.shared
+        Firebase.shared.getClubKeys { keys in
+            keys.forEach { club in
+                let _ = Club(club.key, club.value)
+            }
+            print(Club.all)
+        }
     }
     
     func getProfile() -> Bool{

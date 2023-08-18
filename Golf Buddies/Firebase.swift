@@ -27,9 +27,33 @@ class Firebase{
         }
     }
     
+    public func getClubKeys(_ completion: @escaping ([String: String]) -> ()){
+        var keys: [String: String] = [:]
+        self.ref.child("club").observeSingleEvent(of: .value) { snapshot in
+            for child in snapshot.children{
+                if let data = child as? DataSnapshot{
+                    if let clubTitle = data.childSnapshot(forPath: "title").value as? String{
+                        keys[data.key] = clubTitle
+                    }
+                }
+            }
+            completion(keys)
+        }
+    }
+    
     public func setHole(_ club: String, _ course: Int, _ hole: Int, _ par: Int, _ yards: Int){
         let layout = self.ref.child("club/\(club)/course/\(course)/layout/").child(String(hole))
         layout.setValue(["par":par,"yards":yards])
+    }
+    
+    public func getCourseLayout(_ id: String, _ completion: @escaping ([Int: [Hole]]) -> ()){
+        var courses: [Int: [Hole]] = [:]
+        self.ref.child("club/\(id)/course").observeSingleEvent(of: .value) { snapshot in
+            if let value = snapshot.value{
+                print(value)
+                completion(courses)
+            }
+        }
     }
     
 }

@@ -12,6 +12,8 @@ class Club{
     let id: String
     let title: String
     
+    static var all = [Club]()
+    
     var courses: [String: [Int: Hole]]
     
     init(_ id: String, _ title: String){
@@ -19,6 +21,11 @@ class Club{
         self.title = title
         self.courses = [:]
         self.getCourses()
+        
+        if (!Club.all.contains(where: {$0.id == id})){
+            Club.all.append(self)
+        }
+        
     }
     
     func getDistance(_ course: String) -> Int{
@@ -32,7 +39,9 @@ class Club{
     }
     
     private func getCourses(){
-        
+        Firebase.shared.getCourseLayout(self.id) { courses in
+            print(courses)
+        }
     }
     
 }
