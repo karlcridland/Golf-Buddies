@@ -46,13 +46,30 @@ class Firebase{
         layout.setValue(["par":par,"yards":yards])
     }
     
-    public func getCourseLayout(_ id: String, _ completion: @escaping ([Int: [Hole]]) -> ()){
-        var courses: [Int: [Hole]] = [:]
+    public func getCourseLayout(_ id: String, _ completion: @escaping ([Int: [Int: Hole]]) -> ()){
+        
+        var courses: [Int: [Int: Hole]] = [:]
+        
         self.ref.child("club/\(id)/course").observeSingleEvent(of: .value) { snapshot in
-            if let value = snapshot.value{
-                print(value)
-                completion(courses)
+            for child in snapshot.children{
+                if let course = child as? DataSnapshot{
+                    var holes: [Int: Hole] = [:]
+                    for hole in course.childSnapshot(forPath: "layout").children{
+                        if let holeData = hole as? DataSnapshot{
+                            if let par = holeData.childSnapshot(forPath: "par").value as? Int, let yards = holeData.childSnapshot(forPath: "yards").value as? Int{
+                                if let n = Int(holeData.key){
+                                    holes[n] = Hole(par: par, yards: yards)
+                                }
+                            }
+                        }
+                    }
+                    
+                    if let courseKey = Int(course.key){
+                        courses[courseKey] = holes
+                    }
+                }
             }
+            completion(courses)
         }
     }
     

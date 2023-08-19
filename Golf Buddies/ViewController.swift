@@ -31,7 +31,7 @@ class ViewController: UIViewController {
             keys.forEach { club in
                 let _ = Club(club.key, club.value)
             }
-            print(Club.all)
+            print(Club.getAllCourses())
         }
     }
     
